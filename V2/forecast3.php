@@ -177,14 +177,14 @@
         <p class="info">Fill in the details to get a forecast for your desired property.</p>
 
         <form id="forecastForm">
-            <label for="suburbSearch">Which suburb are you interested in?</label>
+            <label for="suburbSearch">Suburb</label>
             <div style="position: relative;">
                 <input type="text" id="suburbSearch" placeholder="Search for a suburb" autocomplete="off" required>
                 <input type="hidden" name="postcode" id="postcode">
                 <div class="suggestions" id="suggestions"></div>
             </div>
 
-            <label>When do you plan to buy the house?</label>
+            <label>Forecast date</label>
             <div class="row">
                 <select name="year" required>
                     <option value="" disabled selected>Select Year</option>
@@ -206,37 +206,37 @@
                 </select>
             </div>
 
-            <label for="rooms">How many rooms do you need?</label>
+            <label for="rooms">Number of rooms</label>
             <select name="rooms" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i}</option>`);</script>
             </select>
 
-            <label for="bathroom">How many bathrooms do you need?</label>
+            <label for="bathroom">Number of bathrooms</label>
             <select name="bathroom" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i}</option>`);</script>
             </select>
 
-            <label for="car">How many car spaces do you need?</label>
+            <label for="car">Number of car spaces</label>
             <select name="car" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i}</option>`);</script>
             </select>
 
-            <label for="landsize">How much land size do you prefer? (in sqm)</label>
+            <label for="landsize">Land size (sqm)</label>
             <select name="landsize" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i * 100}</option>`);</script>
             </select>
 
-            <label for="buildingarea">How big should the building area be? (in sqm)</label>
+            <label for="buildingarea">Building area (sqm)</label>
             <select name="buildingarea" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i * 50}</option>`);</script>
             </select>
 
-            <label for="distance">How far from CBD do you prefer? (km)</label>
+            <label for="distance">Distance from CBD (km)</label>
             <select name="distance" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i} km</option>`);</script>
