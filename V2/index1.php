@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
             background-color: #f4f4f4;
             text-align: center;
         }
+
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -22,24 +24,29 @@
             background-color: #333;
             color: white;
         }
+
         .navbar ul {
             list-style: none;
             padding: 0;
             display: flex;
         }
+
         .navbar ul li {
             margin: 0 15px;
         }
+
         .navbar ul li a {
             color: white;
             text-decoration: none;
         }
+
         .search-wrapper {
             position: relative;
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
         }
+
         #searchInput {
             background-color: white;
             color: black;
@@ -51,9 +58,11 @@
             outline: none;
             box-shadow: 0 1px 6px rgb(0, 0, 0);
         }
+
         #searchInput::placeholder {
             color: #888;
         }
+
         #resultsContainer {
             display: none;
             position: absolute;
@@ -69,15 +78,18 @@
             z-index: 1000;
             padding: 8px 0;
         }
+
         .result {
             padding: 12px 24px;
             color: black;
             cursor: pointer;
             font-size: 15px;
         }
+
         .result:hover {
             background-color: rgb(235, 235, 235);
         }
+
         .hero {
             background-color: black;
             height: 200px;
@@ -89,9 +101,12 @@
             flex-direction: column;
             text-align: center;
         }
-        .hero h1, .hero p {
+
+        .hero h1,
+        .hero p {
             margin: 0;
         }
+
         .content {
             padding: 20px;
             background: white;
@@ -100,6 +115,7 @@
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
+
         .btn {
             display: inline-block;
             padding: 10px 20px;
@@ -111,6 +127,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="navbar">
@@ -122,7 +139,7 @@
             <nav>
                 <ul>
                     <li><a href="index1.php">Home</a></li>
-                    <li><a href="forecast2.php">Forecast</a></li>
+                    <li><a href="forecast3.php">Forecast</a></li>
                     <li><a href="about1.php">About</a></li>
                     <li><a href="trobleshoot3.php">Troubleshoot</a></li>
                 </ul>
@@ -133,7 +150,7 @@
     <section class="hero">
         <h1>Start Your Property Forecast Today</h1>
         <p>Accurate machine learning predictions for Melbourne real estate.</p>
-        <a href="forecast2.php" class="btn">Get Started</a>
+        <a href="forecast3.php" class="btn">Get Started</a>
     </section>
 
     <div class="content">
@@ -150,5 +167,5 @@
     <script src="sections.js"></script>
     <script src="search.js"></script>
 </body>
-</html>
 
+</html>

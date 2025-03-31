@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
             padding: 0;
             background-color: #f4f4f4;
         }
+
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -21,24 +23,29 @@
             background-color: #333;
             color: white;
         }
+
         .navbar ul {
             list-style: none;
             padding: 0;
             display: flex;
         }
+
         .navbar ul li {
             margin: 0 15px;
         }
+
         .navbar ul li a {
             color: white;
             text-decoration: none;
         }
+
         .search-wrapper {
             position: relative;
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
         }
+
         #searchInput {
             background-color: white;
             color: black;
@@ -50,6 +57,7 @@
             outline: none;
             box-shadow: 0 1px 6px rgb(0, 0, 0);
         }
+
         #resultsContainer {
             display: none;
             position: absolute;
@@ -65,15 +73,18 @@
             z-index: 1000;
             padding: 8px 0;
         }
+
         .result {
             padding: 12px 24px;
             color: black;
             cursor: pointer;
             font-size: 15px;
         }
+
         .result:hover {
             background-color: rgb(235, 235, 235);
         }
+
         .container {
             background: white;
             max-width: 700px;
@@ -83,12 +94,15 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             text-align: left;
         }
+
         label {
             font-weight: bold;
             display: block;
             margin-top: 15px;
         }
-        input, select {
+
+        input,
+        select {
             width: 100%;
             padding: 12px;
             margin: 5px 0;
@@ -97,6 +111,7 @@
             font-size: 16px;
             background: white;
         }
+
         button {
             background: #007bff;
             color: white;
@@ -108,23 +123,28 @@
             width: 100%;
             margin-top: 20px;
         }
+
         button:hover {
             background: #0056b3;
         }
+
         .info {
             font-size: 14px;
             color: gray;
             margin-bottom: 10px;
             text-align: center;
         }
+
         .row {
             display: flex;
             justify-content: space-between;
             gap: 10px;
         }
+
         .row select {
             width: 48%;
         }
+
         .result-box {
             margin-top: 30px;
             padding: 20px;
@@ -132,6 +152,7 @@
             border-left: 4px solid green;
             display: none;
         }
+
         .suggestions {
             position: absolute;
             background-color: white;
@@ -143,16 +164,19 @@
             z-index: 999;
             display: none;
         }
+
         .suggestions div {
             padding: 10px;
             cursor: pointer;
             font-size: 14px;
         }
+
         .suggestions div:hover {
             background-color: #f0f0f0;
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="navbar">
@@ -176,7 +200,7 @@
         <h2>Property Forecast Questionnaire</h2>
         <p class="info">Fill in the details to get a forecast for your desired property.</p>
 
-        <form id="forecastForm">
+        <form id="forecastForm" action="predict.php" method="POST">
             <label for="suburbSearch">Suburb</label>
             <div style="position: relative;">
                 <input type="text" id="suburbSearch" placeholder="Search for a suburb" autocomplete="off" required>
@@ -200,7 +224,8 @@
                     <option value="" disabled selected>Select Month</option>
                     <script>
                         const months = ["January", "February", "March", "April", "May", "June",
-                                        "July", "August", "September", "October", "November", "December"];
+                            "July", "August", "September", "October", "November", "December"
+                        ];
                         months.forEach(m => document.write(`<option value="${m}">${m}</option>`));
                     </script>
                 </select>
@@ -209,37 +234,49 @@
             <label for="rooms">Number of rooms</label>
             <select name="rooms" required>
                 <option value="" disabled selected>Choose a number</option>
-                <script>for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i}</option>`);</script>
+                <script>
+                    for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i}</option>`);
+                </script>
             </select>
 
             <label for="bathroom">Number of bathrooms</label>
             <select name="bathroom" required>
                 <option value="" disabled selected>Choose a number</option>
-                <script>for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i}</option>`);</script>
+                <script>
+                    for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i}</option>`);
+                </script>
             </select>
 
             <label for="car">Number of car spaces</label>
             <select name="car" required>
                 <option value="" disabled selected>Choose a number</option>
-                <script>for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i}</option>`);</script>
+                <script>
+                    for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i}</option>`);
+                </script>
             </select>
 
             <label for="landsize">Land size (sqm)</label>
             <select name="landsize" required>
                 <option value="" disabled selected>Choose a number</option>
-                <script>for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i * 100}</option>`);</script>
+                <script>
+                    for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i * 100}</option>`);
+                </script>
             </select>
 
             <label for="buildingarea">Building area (sqm)</label>
             <select name="buildingarea" required>
                 <option value="" disabled selected>Choose a number</option>
-                <script>for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i * 50}</option>`);</script>
+                <script>
+                    for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i * 50}</option>`);
+                </script>
             </select>
 
             <label for="distance">Distance from CBD (km)</label>
             <select name="distance" required>
                 <option value="" disabled selected>Choose a number</option>
-                <script>for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i} km</option>`);</script>
+                <script>
+                    for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i} km</option>`);
+                </script>
             </select>
 
             <button type="submit">Get Forecast</button>
@@ -256,5 +293,7 @@
     <script src="search.js"></script>
     <script src="suburb-autocomplete.js"></script>
     <script src="index.js"></script>
+
 </body>
+
 </html>
