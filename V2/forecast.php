@@ -174,6 +174,14 @@
         .suggestions div:hover {
             background-color: #f0f0f0;
         }
+        
+        .input-error {
+            border: 2px solid red !important;
+            background-color: #fff0f0;
+        }
+        .suggestion-item.highlight {
+            background-color: #e0e0e0;
+        }
     </style>
 </head>
 
@@ -187,10 +195,10 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="index1.php">Home</a></li>
-                    <li><a href="forecast2.php">Forecast</a></li>
-                    <li><a href="about1.php">About</a></li>
-                    <li><a href="trobleshoot3.php">Troubleshoot</a></li>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="forecast.php">Forecast</a></li>
+                    <li><a href="about.php">About</a></li>
+                    <li><a href="trobleshoot.php">Troubleshoot</a></li>
                 </ul>
             </nav>
         </div>
@@ -200,17 +208,19 @@
         <h2>Property Forecast Questionnaire</h2>
         <p class="info">Fill in the details to get a forecast for your desired property.</p>
 
-        <form id="forecastForm" action="predict.php" method="POST">
+        <form id="forecastForm" method="POST" action="predict.php" novalidate>
+            
             <label for="suburbSearch">Suburb</label>
             <div style="position: relative;">
                 <input type="text" id="suburbSearch" placeholder="Search for a suburb" autocomplete="off" required>
-                <input type="hidden" name="postcode" id="postcode">
-                <div class="suggestions" id="suggestions"></div>
+                <input type="hidden" name="Suburb" id="selectedSuburb">
+                <input type="hidden" name="Postcode" id="postcode">
+                <div class="suggestions" id="suggestions" style="position: absolute; background: white; border: 1px solid #ccc; width: 100%; max-height: 200px; overflow-y: auto; z-index: 999; display: none;"></div>
             </div>
 
             <label>Forecast date</label>
             <div class="row">
-                <select name="year" required>
+                <select name="Year" required>
                     <option value="" disabled selected>Select Year</option>
                     <script>
                         const year = new Date().getFullYear();
@@ -220,7 +230,7 @@
                     </script>
                 </select>
 
-                <select name="month" required>
+                <select name="Month" required>
                     <option value="" disabled selected>Select Month</option>
                     <script>
                         const months = ["January", "February", "March", "April", "May", "June",
@@ -232,7 +242,7 @@
             </div>
 
             <label for="rooms">Number of rooms</label>
-            <select name="rooms" required>
+            <select name="Avg_Rooms" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>
                     for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i}</option>`);
@@ -240,7 +250,7 @@
             </select>
 
             <label for="bathroom">Number of bathrooms</label>
-            <select name="bathroom" required>
+            <select name="Avg_Bathroom" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>
                     for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i}</option>`);
@@ -248,7 +258,7 @@
             </select>
 
             <label for="car">Number of car spaces</label>
-            <select name="car" required>
+            <select name="Avg_Car" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>
                     for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i}</option>`);
@@ -256,7 +266,7 @@
             </select>
 
             <label for="landsize">Land size (sqm)</label>
-            <select name="landsize" required>
+            <select name="Avg_Landsize" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>
                     for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i * 100}</option>`);
@@ -264,7 +274,7 @@
             </select>
 
             <label for="buildingarea">Building area (sqm)</label>
-            <select name="buildingarea" required>
+            <select name="Avg_BuildingArea" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>
                     for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i * 50}</option>`);
@@ -272,12 +282,16 @@
             </select>
 
             <label for="distance">Distance from CBD (km)</label>
-            <select name="distance" required>
+            <select name="Avg_Distance" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>
                     for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i} km</option>`);
                 </script>
             </select>
+
+            <input type="hidden" name="Avg_Lattitude" value="-37.8136">
+            <input type="hidden" name="Avg_Longtitude" value="144.9631">
+            <input type="hidden" name="Price_Change" value="0.05">
 
             <button type="submit">Get Forecast</button>
         </form>
@@ -292,8 +306,6 @@
     <script src="sections.js"></script>
     <script src="search.js"></script>
     <script src="suburb-autocomplete.js"></script>
-    <script src="index.js"></script>
-
 </body>
 
 </html>
