@@ -1,4 +1,3 @@
-// sections.js
 const troubleshootSections = [
     { id: 'overview', title: 'Overview', content: 'General help and instructions for users.' },
     { id: 'login', title: 'Login Issues', content: 'Problems like incorrect password or account access.' },

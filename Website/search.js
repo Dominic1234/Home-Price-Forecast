@@ -1,4 +1,3 @@
-// search.js
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const resultsContainer = document.getElementById('resultsContainer');
@@ -28,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
           el.className = 'result';
           el.innerHTML = `<strong>${section.title}</strong><br><small>${section.content}</small>`;
           el.onclick = () => {
-            // Navigate to trobleshoot2.php with anchor (if on a different page)
-            window.location.href = `trobleshoot2.php#${section.id}`;
+            // Navigate to troubleshoot.php with anchor (if on a different page)
+            window.location.href = `troubleshoot.php#${section.id}`;
           };
           resultsContainer.appendChild(el);
         });
