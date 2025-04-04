@@ -138,10 +138,10 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="index1.php">Home</a></li>
-                    <li><a href="forecast3.php">Forecast</a></li>
-                    <li><a href="about1.php">About</a></li>
-                    <li><a href="trobleshoot3.php">Troubleshoot</a></li>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="forecast.php">Forecast</a></li>
+                    <li><a href="about.php">About</a></li>
+                    <li><a href="trobleshoot.php">Troubleshoot</a></li>
                 </ul>
             </nav>
         </div>
@@ -150,7 +150,7 @@
     <section class="hero">
         <h1>Start Your Property Forecast Today</h1>
         <p>Accurate machine learning predictions for Melbourne real estate.</p>
-        <a href="forecast3.php" class="btn">Get Started</a>
+        <a href="forecast.php" class="btn">Get Started</a>
     </section>
 
     <div class="content">
