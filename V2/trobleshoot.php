@@ -187,10 +187,10 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="index1.php">Home</a></li>
-                    <li><a href="forecast2.php">Forecast</a></li>
-                    <li><a href="about1.php">About</a></li>
-                    <li><a href="trobleshoot3.php">Troubleshoot</a></li>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="forecast.php">Forecast</a></li>
+                    <li><a href="about.php">About</a></li>
+                    <li><a href="trobleshoot.php">Troubleshoot</a></li>
                 </ul>
             </nav>
         </div>
