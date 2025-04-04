@@ -218,7 +218,7 @@
                 <div class="suggestions" id="suggestions" style="position: absolute; background: white; border: 1px solid #ccc; width: 100%; max-height: 200px; overflow-y: auto; z-index: 999; display: none;"></div>
             </div>
 
-            <label>Forecast date</label>
+            <label>When would you like to buy or sell a property?</label>
             <div class="row">
                 <select name="Year" required>
                     <option value="" disabled selected>Select Year</option>
@@ -241,7 +241,7 @@
                 </select>
             </div>
 
-            <label for="rooms">Number of rooms</label>
+            <label for="rooms">Number of bedrooms</label>
             <select name="Avg_Rooms" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>
@@ -265,7 +265,7 @@
                 </script>
             </select>
 
-            <label for="landsize">Land size (sqm)</label>
+            <label for="landsize">What is the size of the block (sqm)?</label>
             <select name="Avg_Landsize" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>
@@ -273,7 +273,7 @@
                 </script>
             </select>
 
-            <label for="buildingarea">Building area (sqm)</label>
+            <label for="buildingarea">What is the house footprint (sqm)?</label>
             <select name="Avg_BuildingArea" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>
