@@ -210,7 +210,7 @@
 
         <form id="forecastForm" method="POST" action="predict.php" novalidate>
             
-            <label for="suburbSearch">Which suburb are you interested in?</label>
+            <label for="suburbSearch">Suburb</label>
             <div style="position: relative;">
                 <input type="text" id="suburbSearch" placeholder="Search for a suburb" autocomplete="off" required>
                 <input type="hidden" name="Suburb" id="selectedSuburb">
@@ -241,7 +241,7 @@
                 </select>
             </div>
 
-            <label for="rooms">How many bedrooms?</label>
+            <label for="rooms">Number of bedrooms</label>
             <select name="Avg_Rooms" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>
@@ -249,7 +249,7 @@
                 </script>
             </select>
 
-            <label for="bathroom">How many bathrooms?</label>
+            <label for="bathroom">Number of bathrooms</label>
             <select name="Avg_Bathroom" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>
@@ -257,7 +257,7 @@
                 </script>
             </select>
 
-            <label for="car">How many car spaces?</label>
+            <label for="car">Number of car spaces</label>
             <select name="Avg_Car" required>
                 <option value="" disabled selected>Choose a number</option>
                 <script>
