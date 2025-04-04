@@ -141,7 +141,7 @@
                     <li><a href="index.php">Home</a></li>
                     <li><a href="forecast.php">Forecast</a></li>
                     <li><a href="about.php">About</a></li>
-                    <li><a href="trobleshoot.php">Troubleshoot</a></li>
+                    <li><a href="troubleshoot.php">Troubleshoot</a></li>
                 </ul>
             </nav>
         </div>
