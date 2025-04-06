@@ -13,6 +13,6 @@ Home Price Forecast is a webapp to predict the value of a property using ML trai
 4. Open localhost/Website/index.php
 
 # Links
-Colab model: https://colab.research.google.com/drive/1V6oLEWSNVJrjjDnvhPF43AZ3zNJq2UI2#scrollTo=dwAck8jXmUjN
-XAMPP: https://www.apachefriends.org/
-Dataset: https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot
+1. Colab model: https://colab.research.google.com/drive/1V6oLEWSNVJrjjDnvhPF43AZ3zNJq2UI2#scrollTo=dwAck8jXmUjN
+2. XAMPP: https://www.apachefriends.org/
+3. Dataset: https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot
