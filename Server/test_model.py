@@ -8,7 +8,7 @@ def test_server_connection():
     print("Testing connection to model server...")
     try:
         # Test single prediction
-        test_data = {"features": [0.5, 0.2, 0.3, 0.1, 0.8, 0.9, 0.4, 0.3, 0.7, 0.2]}
+        test_data = {"features": [3121, 2025, 2, 2, 1, 100, 50, 10]}
         response = requests.post("http://localhost:5000/predict", json=test_data)
         
         if response.status_code == 200:
@@ -37,9 +37,9 @@ def test_batch_prediction():
         # Batch prediction test
         batch_data = {
             "features": [
-                [0.5, 0.2, 0.3, 0.1, 0.8, 0.9, 0.4, 0.3, 0.7, 0.2],
-                [0.1, 0.3, 0.5, 0.7, 0.9, 0.2, 0.4, 0.6, 0.8, 0.1],
-                [0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.0]
+                [3000, 2026, 3, 2, 2, 300, 150, 2],
+                [3121, 2025, 1, 1, 1, 150, 100, 25],
+                [3011, 2026, 2, 2, 2, 200, 100, 7]
             ]
         }
         
