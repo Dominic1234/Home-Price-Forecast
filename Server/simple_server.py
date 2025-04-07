@@ -14,7 +14,7 @@ try:
 except FileNotFoundError:
     print("Creating new model...")
     # Sample data - replace with your actual training data
-    X_sample = np.random.rand(100, 10)
+    X_sample = np.random.rand(100, 8) # 100 samples, 8 features
     y_sample = np.random.rand(100)
     
     # Your specified model parameters

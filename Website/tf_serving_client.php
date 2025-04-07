@@ -1,5 +1,5 @@
 <?php
-function predictPropertyPrice($input_data, $serverUrl = 'http://localhost:8501', $modelName = 'property_forecast')
+function predictPropertyPrice($input_data, $serverUrl = 'http://localhost:5000', $modelName = 'property_forecast')
 {
 
     //Tensorflow Serving REST API endpoint
