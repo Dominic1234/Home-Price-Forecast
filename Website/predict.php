@@ -5,7 +5,7 @@
  */
 
 //Include Tensorflow Serving client
-require_once 'tf_serving_client.php';
+require_once 'serving_client.php';
 
 //Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -18,10 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'Avg_Car',
         'Avg_Landsize',
         'Avg_BuildingArea',
-        'Avg_Distance',
-        'Avg_Lattitude',
-        'Avg_Longtitude',
-        'Price_Change'
+        'Avg_Distance'
     ];
 
     $missing_fields = [];
