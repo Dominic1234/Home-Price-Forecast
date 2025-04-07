@@ -6,9 +6,20 @@ if (!is_array($input_data)) {
 throw new InvalidArgumentException('Input data must be an array of features');
 }
 
+$selected_features = [
+    (float)$input_data['Postcode'],
+    (float)$input_data['Year'],
+    (float)$input_data['Avg_Rooms'],
+    (float)$input_data['Avg_Bathroom'],
+    (float)$input_data['Avg_Car'],
+    (float)$input_data['Avg_Landsize'],
+    (float)$input_data['Avg_BuildingArea'],
+    (float)$input_data['Avg_Distance']
+];
+
 // Prepare the request data
 $requestData = [
-'features' => $input_data
+'features' => $selected_features
 ];
 
 // Initialize cURL session
