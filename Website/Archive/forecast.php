@@ -182,15 +182,6 @@
         .suggestion-item.highlight {
             background-color: #e0e0e0;
         }
-        .slider-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        input[type="range"] {
-            flex: 1;
-        }
     </style>
 </head>
 
@@ -275,23 +266,28 @@
             </select>
 
             <label for="landsize">What is the size of the block (sqm)?</label>
-            <div class="slider-container">
-                <input type="range" id="landsize" name="Avg_Landsize" min="1" max="1000" step="1" value="500" oninput="landsizeValue.value = this.value">
-                <output id="landsizeValue">500</output> sqm
-            </div>
+            <select name="Avg_Landsize" required>
+                <option value="" disabled selected>Choose a number</option>
+                <script>
+                    for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i * 100}</option>`);
+                </script>
+            </select>
 
             <label for="buildingarea">What is the house footprint (sqm)?</label>
-            <div class="slider-container">
-                <input type="range" id="buildingarea" name="Avg_BuildingArea" min="1" max="500" step="1" value="250" oninput="buildingAreaValue.value = this.value">
-                <output id="buildingAreaValue">250</output> sqm
-            </div>
+            <select name="Avg_BuildingArea" required>
+                <option value="" disabled selected>Choose a number</option>
+                <script>
+                    for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i * 50}</option>`);
+                </script>
+            </select>
 
-            <label for="distance">Distance from CBD (km)</label> 
-            <div class="slider-container">
-                <input type="range" id="distance" name="Avg_Distance" min="1000" max="10000" step="1" value="5400"
-                        oninput="distanceValue.textContent = (this.value / 1000).toFixed(1)">
-                <output id="distanceValue">5.5</output> km
-            </div>
+            <label for="distance">How far is the property from the CBD (in km)?</label>
+            <select name="Avg_Distance" required>
+                <option value="" disabled selected>Choose a number</option>
+                <script>
+                    for (let i = 1; i <= 10; i++) document.write(`<option value="${i}">${i} km</option>`);
+                </script>
+            </select>
 
             <input type="hidden" name="Avg_Lattitude" value="-37.8136">
             <input type="hidden" name="Avg_Longtitude" value="144.9631">
