@@ -293,7 +293,7 @@
             <input type="hidden" name="Avg_Longtitude" value="144.9631">
             <input type="hidden" name="Price_Change" value="0.05">
 
-            <button type="submit">Get Forecast</button>
+            <button>Get Forecast</button>
         </form>
 
         <div class="result-box" id="forecastResult"></div>
