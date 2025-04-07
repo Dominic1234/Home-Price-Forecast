@@ -1,4 +1,4 @@
-<?php
+<?php /*
 function predictPropertyPrice($input_data, $serverUrl = 'http://localhost:5000', $modelName = 'property_forecast')
 {
 
@@ -71,4 +71,4 @@ function predictPropertyPrice($input_data, $serverUrl = 'http://localhost:5000',
     curl_close($ch);
 
     return $result;
-}
+}*/
