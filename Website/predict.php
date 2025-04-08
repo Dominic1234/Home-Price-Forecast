@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         error_log("Property prediction result: " . json_encode($result));
 
         // Redirect back to the form with the result
-        header("Location: index.html?result=" . urlencode($trend));
+        header("Location: result.html?result=" . urlencode($trend));
         exit;
     } catch (Exception $e) {
         // Log the error
