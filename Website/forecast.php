@@ -227,28 +227,16 @@
                 <div class="suggestions" id="suggestions" style="position: absolute; background: white; border: 1px solid #ccc; width: 100%; max-height: 200px; overflow-y: auto; z-index: 999; display: none;"></div>
             </div>
 
-            <label>When would you like to buy or sell a property?</label>
-            <div class="row">
-                <select name="Year" required>
-                    <option value="" disabled selected>Select Year</option>
-                    <script>
-                        const year = new Date().getFullYear();
-                        for (let i = year; i <= year + 10; i++) {
-                            document.write(`<option value="${i}">${i}</option>`);
-                        }
-                    </script>
-                </select>
-
-                <select name="Month" required>
-                    <option value="" disabled selected>Select Month</option>
-                    <script>
-                        const months = ["January", "February", "March", "April", "May", "June",
-                            "July", "August", "September", "October", "November", "December"
-                        ];
-                        months.forEach(m => document.write(`<option value="${m}">${m}</option>`));
-                    </script>
-                </select>
-            </div>
+            <label for="years">What years would you like to buy or sell a property?</label>
+            <select name="Year" required>
+                <option value="" disabled selected>Choose a number</option>
+                <script>
+                    const year = new Date().getFullYear();
+                    for (let i = year; i <= year + 10; i++) {
+                        document.write(`<option value="${i}">${i}</option>`);
+                    }
+                </script>
+            </select>
 
             <label for="rooms">Number of bedrooms</label>
             <select name="Avg_Rooms" required>
@@ -288,14 +276,10 @@
 
             <label for="distance">Distance from CBD (km)</label> 
             <div class="slider-container">
-                <input type="range" id="distance" name="Avg_Distance" min="1000" max="10000" step="1" value="5400"
-                        oninput="distanceValue.textContent = (this.value / 1000).toFixed(1)">
-                <output id="distanceValue">5.5</output> km
+                <input type="range" id="distance" name="Avg_Distance" min="1" max="50" step="0.1" value="25" oninput="distanceValue.textContent = parseFloat(this.value).toFixed(1)">
+                <output id="distanceValue">25</output> km
             </div>
-
-            <input type="hidden" name="Avg_Lattitude" value="-37.8136">
-            <input type="hidden" name="Avg_Longtitude" value="144.9631">
-            <input type="hidden" name="Price_Change" value="0.05">
+            <input type="hidden" name="Month" value="1">
 
             <button>Get Forecast</button>
         </form>

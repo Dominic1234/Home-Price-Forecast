@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $required_fields = [
         'Postcode',
         'Year',
+        'Month',
         'Avg_Rooms',
         'Avg_Bathroom',
         'Avg_Car',
@@ -36,25 +37,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Call the prediction function with form data
         $result = predictPropertyPrice($_POST);
 
-        // Extract the prediction result
-        $prediction_class = $result['predictions'][0];
+        // Extract the Precentage result
+        $precentage[] = 0.0;
+        for($i=1;$i<=11;$i++) {
+            $precentage[] = ($result['predictions'][$i]-$result['predictions'][($i-1)])/$result['predictions'][($i-1)];
+        }
 
-        // Map numeric class to meaningful output
-        $trend_mapping = [
-            0 => 'Decreasing',
-            1 => 'Increasing'
+        $data = [
+            'month' => ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"],
+            'precentage' => $precentage,
+            'prices' => $result['predictions']
         ];
-
-        $trend = isset($trend_mapping[$prediction_class]) ?
-            $trend_mapping[$prediction_class] :
-            "Unknown (Class $prediction_class)";
-
+        
         // Log the prediction for debugging
-        error_log("Property prediction result: " . json_encode($result));
+        error_log("Property prediction result: " . json_encode($data));
 
         // Redirect back to the form with the result
-        header("Location: result.html?result=" . urlencode($trend));
+        header("Location: result.html?result=" . urlencode(json_encode($data)));
         exit;
+
     } catch (Exception $e) {
         // Log the error
         error_log("Prediction error: " . $e->getMessage());

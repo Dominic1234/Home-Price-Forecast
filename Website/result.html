@@ -2,66 +2,298 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Home Price Forecast</title>
+  <title>Monthly Price Change Result</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="styles.css" />
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      padding: 40px;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
     }
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: white;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    .result-box {
-      margin-top: 20px;
-      padding: 15px;
-      background: #e6ffe6;
-      border-left: 4px solid green;
-      display: none;
-    }
-    h2 {
-      margin-bottom: 20px;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      background: #007bff;
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #333;
       color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
+    }
+
+    .navbar ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+    }
+
+    .navbar ul li {
+      margin: 0 15px;
+    }
+
+    .navbar ul li a {
+      color: white;
       text-decoration: none;
     }
-    .btn:hover {
-      background: #0056b3;
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 40px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .increase {
+      color: green;
+      font-weight: bold;
+    }
+
+    .decrease {
+      color: red;
+      font-weight: bold;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .back-btn:hover {
+      background-color: #0056b3;
+    }
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    #searchInput {
+      background-color: white;
+      color: black;
+      border: none;
+      border-radius: 24px;
+      padding: 12px 24px;
+      font-size: 16px;
+      width: 100%;
+      outline: none;
+      box-shadow: 0 1px 6px rgb(0, 0, 0);
+    }
+    #searchInput::placeholder {
+      color: #888;
+    }
+    #resultsContainer {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      border-radius: 10px;
+      margin-top: 8px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+      padding: 8px 0;
+    }
+    .result {
+      padding: 12px 24px;
+      color: black;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .result:hover {
+      background-color: rgb(235, 235, 235);
     }
   </style>
 </head>
 <body>
+  <!-- Navigation -->
+  <div class="navbar">
+    <div class="logo">Home Price Forecast</div>
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="Search ..." autocomplete="off">
+      <div id="resultsContainer"></div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="forecast.php">Forecast</a></li>
+        <li><a href="about.php">About</a></li>
+        <li><a href="troubleshoot.php">Troubleshoot</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
   <div class="container">
-    <h2>Home Price Forecast</h2>
-    <p>Thank you for using our forecast tool. If a result is available, it will appear below:</p>
+    <h2>Home Price Forecast (Monthly Breakdown)</h2>
+    <p>Forecast will be shown in the chart and table below.</p>
 
-    <div class="result-box" id="resultBox"></div>
+    <canvas id="priceChart" height="300"></canvas>
 
-    <a href="forecast.php" class="btn">Back to Form</a>
+    <div id="resultTable"></div>
+
+    <a href="forecast.php" class="back-btn">← Back to Form</a>
   </div>
 
   <script>
-    // Get forecast result from URL query string
     const urlParams = new URLSearchParams(window.location.search);
-    const result = urlParams.get("result");
+    const rawData = urlParams.get("result");
 
-    if (result) {
-      const resultBox = document.getElementById("resultBox");
-      resultBox.style.display = "block";
-      resultBox.textContent = "📈 Forecast Result: " + decodeURIComponent(result);
+    if (rawData) {
+      const parsed = JSON.parse(decodeURIComponent(rawData));
+      const months = parsed.month;
+      const percentages = parsed.precentage;
+      const prices = parsed.prices;
+
+      // Generate Table
+      let tableHTML = `<table>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Price ($)</th>
+            <th>% Change</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+      for (let i = 0; i < months.length; i++) {
+        const price = prices[i].toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+
+        const change = percentages[i];
+        let arrow = '';
+        let className = '';
+
+        if (change > 0) {
+          arrow = '<span style="color: green;">▲</span>';
+          className = 'increase';
+        } else if (change < 0) {
+          arrow = '<span style="color: red;">▼</span>';
+          className = 'decrease';
+        } else {
+          arrow = '<span style="color: gray;">➖</span>';
+          className = 'neutral';
+        }
+
+        const percentDisplay = `${Math.abs(change * 100).toFixed(2)}% ${arrow}`;
+
+        tableHTML += `
+          <tr>
+            <td>${months[i]}</td>
+            <td>$${price}</td>
+            <td class="${className}">${percentDisplay}</td>
+          </tr>`;
+      }
+
+      tableHTML += '</tbody></table>';
+      document.getElementById('resultTable').innerHTML = tableHTML;
+
+      // Generate Chart
+      const ctx = document.getElementById("priceChart").getContext("2d");
+
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: months,
+          datasets: [{
+            label: "Predicted Price ($)",
+            data: prices,
+            borderColor: "#007bff",
+            backgroundColor: "rgba(0, 123, 255, 0.1)",
+            pointBackgroundColor: "#007bff",
+            fill: true,
+            tension: 0.3,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top'
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const index = context.dataIndex;
+                  const price = parsed.prices[index];
+                  const change = parsed.precentage[index] * 100;
+                  const formattedPrice = "$" + price.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                  });
+                  const formattedChange = change === 0 
+                    ? "0.00%" 
+                    : (change > 0 ? "+" : "") + change.toFixed(2) + "%";
+
+                  return `${formattedPrice} (${formattedChange})`;
+                }
+              }
+            }
+          },
+
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: "Price ($)"
+              },
+              ticks: {
+                callback: value => "$" + value.toLocaleString()
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Month"
+              }
+            }
+          }
+        }
+      });
     }
   </script>
+  <script src="sections.js"></script>
+  <script src="search.js"></script>
 </body>
 </html>

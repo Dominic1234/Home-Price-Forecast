@@ -6,21 +6,31 @@ if (!is_array($input_data)) {
 throw new InvalidArgumentException('Input data must be an array of features');
 }
 
-$selected_features = [
-    (float)$input_data['Postcode'],
-    (float)$input_data['Year'],
-    (float)$input_data['Avg_Rooms'],
-    (float)$input_data['Avg_Bathroom'],
-    (float)$input_data['Avg_Car'],
-    (float)$input_data['Avg_Landsize'],
-    (float)$input_data['Avg_BuildingArea'],
-    (float)$input_data['Avg_Distance']
-];
+for ($month = 1; $month <= 12; $month++) {
+    $selected_features[] = [
+        (int) $input_data['Postcode'],
+        (int)$input_data['Year'],
+        $month, 
+        (float)$input_data['Avg_Rooms'],
+        (float)$input_data['Avg_Bathroom'],
+        (float)$input_data['Avg_Car'],
+        (float)$input_data['Avg_Landsize'],
+        (float)$input_data['Avg_BuildingArea'],
+        (float)$input_data['Avg_Distance']
+    ];
+}
+
+        // DEBUG
+        echo "<h3>DEBUG: All the Post</h3>";
+        echo "<pre>";
+        var_dump($selected_features);
+        echo "</pre>";
 
 // Prepare the request data
 $requestData = [
 'features' => $selected_features
 ];
+
 
 // Initialize cURL session
 $ch = curl_init($serverUrl . '/predict');
