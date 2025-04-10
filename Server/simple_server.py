@@ -1,6 +1,6 @@
 # simple_server.py
 from flask import Flask, request, jsonify
-import pickle
+import joblib
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 
@@ -9,7 +9,7 @@ app = Flask(__name__)
 # Create and save model if it doesn't exist
 try:
     with open('rf_model.pkl', 'rb') as f:
-        model = pickle.load(f)
+        model = joblib.load(f)
     print("Model loaded successfully!")
 except FileNotFoundError:
     print("Creating new model...")
@@ -23,8 +23,27 @@ except FileNotFoundError:
     
     # Save model
     with open('rf_model.pkl', 'wb') as f:
-        pickle.dump(model, f)
+        joblib.dump(model, f)
     print("Model created and saved!")
+
+try:
+    with open('scaler.pkl', 'rb') as f:
+        scaler = joblib.load(f)
+    print("Scaler loaded successfully!")
+except FileNotFoundError:
+    print("Creating new scaler...")
+    # Create a sample scaler - replace with your actual training data
+    from sklearn.preprocessing import StandardScaler
+    
+    X_sample = np.random.rand(100, 8)
+    scaler = StandardScaler()
+    scaler.fit(X_sample)
+    
+    # Save scaler
+    with open('scaler.pkl', 'wb') as f:
+        joblib.dump(scaler, f)
+    print("Scaler created and saved!")
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -39,7 +58,9 @@ def predict():
     if features.ndim == 1:
         features = features.reshape(1, -1)
         
-    predictions = model.predict(features).tolist()
+    scaled_features = scaler.transform(features)
+
+    predictions = model.predict(scaled_features).tolist()
     
     return jsonify({
         'predictions': predictions
